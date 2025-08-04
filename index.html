@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Quality Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Water Quality Prediction</h1>
+        <p>Enter water quality parameters to check if the water is safe:</p>
+        
+        <form method="POST">
+            <div class="form-group">
+                <label for="temp">Temperature (°C):</label>
+                <input type="number" step="0.1" id="temp" name="temp" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="do">Dissolved Oxygen (mg/l):</label>
+                <input type="number" step="0.1" id="do" name="do" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="ph">pH:</label>
+                <input type="number" step="0.1" id="ph" name="ph" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="conductivity">Conductivity (µmhos/cm):</label>
+                <input type="number" step="1" id="conductivity" name="conductivity" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="bod">B.O.D. (mg/l):</label>
+                <input type="number" step="0.1" id="bod" name="bod" required>
+            </div>
+            
+            <button type="submit" class="btn">Predict Water Quality</button>
+        </form>
+        
+        {% if prediction %}
+        <div class="result {{ prediction.lower() }}">
+            <h2>Prediction: {{ prediction }}</h2>
+            <p>The water is {{ prediction }} for use based on the provided parameters.</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
